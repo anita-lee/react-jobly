@@ -1,0 +1,64 @@
+App
+ state: none
+ props: none
+
+RoutesList (-> RouteList.js)            Nav Bar
+/Homepage
+/companies,                             state: none
+/companies/:handle                      props: none
+/jobs                                   Links
+/,
+/*
+
+Homepage
+state: none
+props: none
+
+CompanyList (search bar, background company card) presentational
+state: companies
+props: none
+useEffects: render api call at mount (setting state here) & [state:isSearching]
+function: changes state fired by search form button
+
+    #SearchForm (generic - choose what it should search for)
+    state: input
+    props: none
+    event: filterCompanies, filterJobs
+
+    CompanyCard (one)- presentational / LINK to ***
+    state: none
+    props: companies
+
+CompanyDetail (JobCardsList -> JobCard) - get :id
+State: queried Company
+props: none
+event: :companyId useParams (company), useEffect (mount)! needs it right away.
+
+    JobCardList (access jobs filterd by company id) - presentational
+    state: none
+    props: jobs
+
+        %JobCard (one) - presentational
+        state: none
+        props: job
+
+JobList (search bar, background, jobCards) presentational
+State: jobs
+props: none
+useEffects: render api call at mount (setting state here) & [state:isSearching]
+function: changes state fired by search form button
+
+    #SearchForm (generic - choose what it should search for)
+    state: input
+    props: none
+    event: filterCompanies, filterJobs
+
+    JobCardList
+    state: none
+    props: jobs
+
+        JobCard (one)- presentational / LINK to ***
+        state: none
+        props: job
+
+
