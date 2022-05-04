@@ -32,7 +32,7 @@ function CompanyList() {
 
   return (
     <div>
-      <SearchForm search={searchCompany} />
+      <SearchForm search={searchCompany} queryName={"name"} />
       {!companies
         ?
         <p>Loading...</p>

@@ -1,10 +1,29 @@
-import React from "react";
-import JobList from "./JobList";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom"
+import JobCardList from "./JobCardList";
+import JoblyApi from "./api";
 
 function CompanyDetail() {
+  const [company, setCompany] = useState(null);
+  const params = useParams();
+
+  //Call API to get one company on mount
+  useEffect(function () {
+    (async function getCompany() {
+      const response = await JoblyApi.getCompany(params.handle);
+      setCompany({ ...response });
+    })();
+  }, []);
+
+  if(!company) return <div>Loading...</div>;
+
   return (
-    <div>CompanyDetail</div>
-  )
+    <div>
+      <h2>{company.name}</h2>
+      <h3>{company.description}</h3>
+      <JobCardList jobs={company.jobs} />
+    </div>
+  );
 }
 
-export default CompanyDetail
+export default CompanyDetail;

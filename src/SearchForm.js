@@ -11,9 +11,9 @@ import React, { useState } from "react";
  * { CompanyList, JobList } -> SearchForm
  */
 
-function SearchForm({ search }) {
+function SearchForm({ search, queryName }) {
   const [formData, setFormData] = useState({
-    name:"",
+    queryName:"",
   });
 
   /** Update form input. */
@@ -41,8 +41,8 @@ function SearchForm({ search }) {
                 id="searchByName"
                 placeholder="Enter search term.."
                 onChange={handleChange}
-                name="name"
-                value={formData.name}
+                name={queryName}
+                value={formData[queryName]}
             />
             <button className="search-button btn btn-primary d-inline">Submit</button>
           </div>
