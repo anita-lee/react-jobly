@@ -4,7 +4,7 @@ import React, { useState } from "react";
  *
  * Props:
  * -search (function)
- *
+ * -queryName
  * State:
  * -Form Data
  *
@@ -13,7 +13,7 @@ import React, { useState } from "react";
 
 function SearchForm({ search, queryName }) {
   const [formData, setFormData] = useState({
-    queryName:"",
+    [queryName]:"",
   });
 
   /** Update form input. */
@@ -29,13 +29,12 @@ function SearchForm({ search, queryName }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     search({ ...formData});
-    setFormData(data => ({...data, name:""}));
+    setFormData(data => ({...data, [queryName]:""}));
   }
 
   return (
-      <div>
-        <form onSubmit={handleSubmit}>
-          <div>
+      <div className="row rounded my-4">
+        <form className="input-group" onSubmit={handleSubmit}>
             <input
                 className="form-control"
                 id="searchByName"
@@ -44,8 +43,7 @@ function SearchForm({ search, queryName }) {
                 name={queryName}
                 value={formData[queryName]}
             />
-            <button className="search-button btn btn-primary d-inline">Submit</button>
-          </div>
+            <button className="search-button btn btn-primary">Submit</button>
         </form>
       </div>
   );

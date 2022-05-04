@@ -1,8 +1,8 @@
 import './App.css';
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import RouteList from "./RouteList";
-import Nav from "./Nav";
+import RouteList from "./common/RouteList";
+import Nav from "./common/Nav";
 import "bootstrap/dist/css/bootstrap.css"
 
 function App() {

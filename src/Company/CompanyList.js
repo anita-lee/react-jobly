@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
 import CompanyCard from "./CompanyCard";
-import SearchForm from "./SearchForm";
-import JoblyApi from "./api";
+import SearchForm from "../common/SearchForm";
+import JoblyApi from "../utilities/api";
 
 
-/** Componant to get and render list of companies.
+/** Component to get and render list of companies.
  *
  * Props: none
+ *
  * State:
  * - companies : [ { handle, name, description, numEmployees, logoUrl }, ...]
  * - seachQuery : { name: "" }
+ *
  * Routes -> CompanyList -> CompanyCard
  */
+
 function CompanyList() {
 
   const [companies, setCompanies] = useState(null);
@@ -37,7 +40,7 @@ function CompanyList() {
         ?
         <p>Loading...</p>
         :
-        <div>
+        <div class="row">
           {companies.map(company =>
             <CompanyCard company={company} key={company.handle} />)}
         </div>}

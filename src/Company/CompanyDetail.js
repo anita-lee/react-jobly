@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"
-import JobCardList from "./JobCardList";
-import JoblyApi from "./api";
+import { useParams } from "react-router-dom";
+import JobCardList from "../Job/JobCardList";
+import JoblyApi from "../utilities/api";
 
+/** Company Detail Component
+ *
+ *
+ */
 function CompanyDetail() {
   const [company, setCompany] = useState(null);
   const params = useParams();
@@ -15,7 +19,7 @@ function CompanyDetail() {
     })();
   }, []);
 
-  if(!company) return <div>Loading...</div>;
+  if (!company) return <div>Loading...</div>;
 
   return (
     <div>
