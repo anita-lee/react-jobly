@@ -26,7 +26,7 @@ class JoblyApi {
     const params = (method === "get")
         ? data
         : {};
-    
+
 
     try {
       return (await axios({ url, method, data, params, headers })).data;
@@ -54,3 +54,5 @@ class JoblyApi {
 
   // obviously, you'll add a lot here ...
 }
+
+export default JoblyApi;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-/** Search Form.
+/** Search Form
  *
  * Props:
  * -search (function)
