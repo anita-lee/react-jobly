@@ -11,7 +11,7 @@ import Register from "../Auth/Register";
 
 /** List of Routes
  *
- * Props: none
+ * Props: login, register
  * State: none
  */
 function RouteList({ login, register }) {

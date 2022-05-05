@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useReducer } from "react";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
@@ -14,9 +15,7 @@ class JoblyApi {
   // Remember, the backend needs to be authorized with a token
   // We're providing a token you can use to interact with the backend API
   // DON'T MODIFY THIS TOKEN
-  static token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+  static token = this.token;
 
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
@@ -46,32 +45,38 @@ class JoblyApi {
     return res.company;
   }
 
+  /** Get details on a job by jobId. */
+
   static async getJob(jobId) {
     let res = await this.request(`jobs/${jobId}`);
     return res.job;
   }
 
+  /** Get a token with username/password.  */
+
   static async login(user) {
-    let res = await axios.post(`${BASE_URL}/auth/token`, { data: user });
+    const data = user;
+    let res = await this.request(`auth/token`, data, "post");
     return res.token;
   }
+
+  /** Register a user and get back a token. */
 
   static async register(user) {
-    console.log("USER", user);
-    console.log("blalldlskfjlslk");
     const data = user;
     let res = await this.request(`auth/register`, data, "post");
-    console.log(res.token); 
+
     return res.token;
   }
 
-  //TODO: save token in user object this.token
+  /** Pass in a username and token and get back a user. */
 
+  static async getUser(username, token) {
+    this.token = token;
+    let res = await this.request(`users/${username}`);
+    return res.user;
+  }
 
-
-  // TODO: ADD MORE FUNCTIONS FOR USER/AUTHENTICATE ETC.
-
-  // obviously, you'll add a lot here ...
 }
 
 export default JoblyApi;

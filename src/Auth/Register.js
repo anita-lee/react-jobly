@@ -14,7 +14,13 @@ import React, { useState } from "react";
 
 function Register({ register }) {
 
-  const defaultValues = { username: "", password: "", firstName: "", lastName: "", email: "" };
+  const defaultValues = {
+    username: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    email: ""
+  };
 
   const [formData, setFormData] = useState(defaultValues);
 
@@ -35,23 +41,33 @@ function Register({ register }) {
   }
 
   const formFields = Object.keys(defaultValues);
+  const formNames = {
+    username: "Username",
+    password: "Password",
+    firstName: "First Name",
+    lastName: "Last Name",
+    email: "Email"
+  };
 
   return (
     <div>
       <form className="" onSubmit={handleSubmit}>
-        {formFields.map(field => {
-          return <div key={field}>
-            <label htmlFor={`Register-${field}`}>{field}</label>
-            <input
-              className="form-control"
-              id={`Register-${field}`}
-              onChange={handleChange}
-              name={field}
-              value={formData[field]}
-            />
-          </div>
+        {formFields.map((field, i) => {
+          return (
+            <div key={field}>
+              <label htmlFor={`Register-${field}`}>{formNames[field]}</label>
+              <input
+                type={field === "password" ? field : field === "email" ? field : "text"}
+                className="form-control m-2"
+                id={`Register-${field}`}
+                onChange={handleChange}
+                name={field}
+                value={formData[field]}
+                autoComplete={"true"}
+              />
+            </div>);
         })}
-        <button className="btn btn-primary">Submit</button>
+        <button className="btn btn-primary mt-2">Submit</button>
       </form>
     </div>
   );
