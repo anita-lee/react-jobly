@@ -2,17 +2,48 @@ App
  state: none
  props: none
 
-RoutesList (-> RouteList.js)            Nav Bar
+UserContext
+
+JoblyApp (provider)
+Import UserContext
+state: active user/token
+Render Navbar here
+Render Routes
+Logout function - Update UserContext (remove token/username)
+
+   Login
+   state: form data
+   props: function to login user
+
+   Signup
+   state: form data
+   props: function to signup user
+
+   Profile
+   state: form data
+   prop: update user
+
+RoutesList (-> RouteList.js)            NavBar
 /Homepage
+/login
+/signup
+/profile
 /companies,                             state: none
 /companies/:handle                      props: none
-/jobs                                   Links
-/,
+/jobs                                   Links : Login, Sign Up
+/,                                      Navbar changes on login
 /*
 
 Homepage
 state: none
 props: none
+Links: Login, signup
+
+Navbar
+Links :  HOME - Login, Sign Up
+Links (w/user): HOME - Companies, Jobs, Profile, Log out (username)
+State: active user?
+
 
 CompanyList (search bar, background company card) presentational
 state: companies
@@ -35,12 +66,13 @@ props: none
 event: :companyId useParams (company), useEffect (mount)! needs it right away.
 
     JobCardList (access jobs filterd by company id) - presentational
-    state: none
+    state: isApplied
     props: jobs
 
         %JobCard (one) - presentational
         state: none
         props: job
+        ADD APPLY BUTTON
 
 JobList (search bar, background, jobCards) presentational
 State: jobs
@@ -54,7 +86,7 @@ function: changes state fired by search form button
     event: filterCompanies, filterJobs
 
     JobCardList
-    state: none
+    state: isApplied
     props: jobs
 
         JobCard (one)- presentational / LINK to ***

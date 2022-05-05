@@ -5,7 +5,10 @@ import JoblyApi from "../utilities/api";
 
 /** Company Detail Component
  *
+ * state: company
+ * params: handle
  *
+ * CompanyList -> CompanyCard -> CompanyDetail
  */
 function CompanyDetail() {
   const [company, setCompany] = useState(null);
@@ -22,9 +25,9 @@ function CompanyDetail() {
   if (!company) return <div>Loading...</div>;
 
   return (
-    <div>
-      <h2>{company.name}</h2>
-      <h3>{company.description}</h3>
+    <div className="row">
+      <h2 className="mb-3">{company.name}</h2>
+      <p>{company.description}</p>
       <JobCardList jobs={company.jobs} />
     </div>
   );

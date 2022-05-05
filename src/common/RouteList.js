@@ -4,6 +4,10 @@ import Homepage from "./Homepage";
 import CompanyList from "../Company/CompanyList";
 import JobList from "../Job/JobList";
 import CompanyDetail from "../Company/CompanyDetail";
+import Profile from "../Auth/Profile";
+import Login from "../Auth/Login";
+import Register from "../Auth/Register";
+
 
 /** List of Routes
  *
@@ -17,6 +21,21 @@ function RouteList() {
       <Route
         path="/"
         element={<Homepage />}
+      />
+
+      <Route
+        path="/login"
+        element={<Login />}
+      />
+
+      <Route
+        path="/register"
+        element={<Register />}
+      />
+
+      <Route
+        path="/profile"
+        element={<Profile />}
       />
 
       <Route
@@ -40,7 +59,7 @@ function RouteList() {
       />
 
     </Routes>
-  )
+  );
 }
 
 export default RouteList;

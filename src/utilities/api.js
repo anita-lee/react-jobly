@@ -50,7 +50,7 @@ class JoblyApi {
     let res = await this.request(`jobs/${jobId}`);
     return res.job;
   }
-
+  // TODO: ADD MORE FUNCTIONS FOR USER/AUTHENTICATE ETC.
 
   // obviously, you'll add a lot here ...
 }
