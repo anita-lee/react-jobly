@@ -24,8 +24,8 @@ class JoblyApi {
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${JoblyApi.token}` };
     const params = (method === "get")
-        ? data
-        : {};
+      ? data
+      : {};
 
 
     try {
@@ -50,6 +50,25 @@ class JoblyApi {
     let res = await this.request(`jobs/${jobId}`);
     return res.job;
   }
+
+  static async login(user) {
+    let res = await axios.post(`${BASE_URL}/auth/token`, { data: user });
+    return res.token;
+  }
+
+  static async register(user) {
+    console.log("USER", user);
+    console.log("blalldlskfjlslk");
+    const data = user;
+    let res = await this.request(`auth/register`, data, "post");
+    console.log(res.token); 
+    return res.token;
+  }
+
+  //TODO: save token in user object this.token
+
+
+
   // TODO: ADD MORE FUNCTIONS FOR USER/AUTHENTICATE ETC.
 
   // obviously, you'll add a lot here ...

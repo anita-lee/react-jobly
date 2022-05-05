@@ -14,7 +14,7 @@ import Register from "../Auth/Register";
  * Props: none
  * State: none
  */
-function RouteList() {
+function RouteList({ login, register }) {
   return (
     <Routes>
 
@@ -25,12 +25,12 @@ function RouteList() {
 
       <Route
         path="/login"
-        element={<Login />}
+        element={<Login login={login} />}
       />
 
       <Route
         path="/register"
-        element={<Register />}
+        element={<Register register={register} />}
       />
 
       <Route
