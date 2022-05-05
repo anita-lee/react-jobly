@@ -56,6 +56,7 @@ function JoblyApp() {
   // decode token and setUser state and store token in local Storage,
   // depends on token state.
   useEffect(function () {
+    //TODO: fix iffe
     if (token) {
       (async function getUserName() {
         const username = decodeToken(token);
@@ -66,8 +67,10 @@ function JoblyApp() {
     }
   }, [token]);
 
+  //FIXME: Loading...  conditional
+
   return (
-    <UserContext.Provider value={user?.username|| null}>
+    <UserContext.Provider value={user}>
       <BrowserRouter>
         <Nav logout={logout} />
         <div style={{ height: "50vh" }}

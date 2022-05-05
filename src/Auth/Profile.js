@@ -65,7 +65,7 @@ function Profile({ update }) {
                 name={field}
                 value={formData[field]}
                 autoComplete={"true"}
-                disabled={field === "username" ? true : false}
+                disabled={field === "username"}
               />
             </div>);
         })}

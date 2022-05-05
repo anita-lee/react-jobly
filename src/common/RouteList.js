@@ -8,8 +8,6 @@ import Profile from "../Auth/Profile";
 import Login from "../Auth/Login";
 import Register from "../Auth/Register";
 import UserContext from "../userContext";
-import { user } from "pg/lib/defaults";
-
 
 /** List of Routes.
  *
