@@ -69,6 +69,16 @@ class JoblyApi {
     return res.token;
   }
 
+    /** Update a user. */
+
+    static async update(formData, username, token) {
+      this.token = token;
+      const data = formData;
+      let res = await this.request(`users/${username}`, data, "patch");
+
+      return res.user;
+    }
+
   /** Pass in a username and token and get back a user. */
 
   static async getUser(username, token) {

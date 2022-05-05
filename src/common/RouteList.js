@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Homepage from "./Homepage";
 import CompanyList from "../Company/CompanyList";
@@ -7,14 +7,38 @@ import CompanyDetail from "../Company/CompanyDetail";
 import Profile from "../Auth/Profile";
 import Login from "../Auth/Login";
 import Register from "../Auth/Register";
+import UserContext from "../userContext";
+import { user } from "pg/lib/defaults";
 
 
-/** List of Routes
+/** List of Routes.
  *
- * Props: login, register
+ * Props: login, register, update
  * State: none
  */
-function RouteList({ login, register }) {
+
+function RouteList({ login, register, update }) {
+  const username = useContext(UserContext);
+
+  const protectedRoutes = (
+  <>
+    <Route
+    path="/companies"
+    element={<CompanyList />}
+    />
+
+    <Route
+      path="/jobs"
+      element={<JobList />}
+    />
+
+    <Route
+      path="/companies/:handle"
+      element={<CompanyDetail />}
+    />
+  </>
+  )
+
   return (
     <Routes>
 
@@ -33,26 +57,12 @@ function RouteList({ login, register }) {
         element={<Register register={register} />}
       />
 
+    {username && protectedRoutes}
+
       <Route
         path="/profile"
-        element={<Profile />}
+        element={<Profile update={update} />}
       />
-
-      <Route
-        path="/companies"
-        element={<CompanyList />}
-      />
-
-      <Route
-        path="/jobs"
-        element={<JobList />}
-      />
-
-      <Route
-        path="/companies/:handle"
-        element={<CompanyDetail />}
-      />
-
       <Route
         path="/*"
         element={<Navigate to="/" />}

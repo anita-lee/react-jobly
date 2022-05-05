@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter } from "react-router-dom";
 import RouteList from "./common/RouteList";
 import Nav from "./common/Nav";
-import UserContext from "./UserContext";
+import UserContext from "./userContext";
 import JoblyApi from "./utilities/api";
 import jwt_decode from "jwt-decode";
 
@@ -34,7 +34,13 @@ function JoblyApp() {
     setToken(registerToken);
   };
 
-  //strip state of user and token
+   //api call for updating formData
+   async function update(formData) {
+    const updatedUser = await JoblyApi.update(formData, user.username, token);
+    setUser(preUser => ({...preUser, ...updatedUser}));
+  };
+
+  //strip state of user and token, strip local Storage of token
   function logout() {
     setToken(() => null);
     setUser(() => null);
@@ -47,7 +53,8 @@ function JoblyApp() {
     return decode.username;
   }
 
-  // decode token and setUser state, depends on token.
+  // decode token and setUser state and store token in local Storage,
+  // depends on token state.
   useEffect(function () {
     if (token) {
       (async function getUserName() {
@@ -65,7 +72,7 @@ function JoblyApp() {
         <Nav logout={logout} />
         <div style={{ height: "50vh" }}
           className="container d-flex" >
-          <RouteList register={register} login={login} />
+          <RouteList register={register} login={login} update={update} />
         </div>
       </BrowserRouter>
     </UserContext.Provider>
