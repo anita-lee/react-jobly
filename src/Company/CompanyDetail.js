@@ -16,10 +16,11 @@ function CompanyDetail() {
 
   //Call API to get one company on mount
   useEffect(function () {
-    (async function getCompany() {
+    async function getCompany() {
       const response = await JoblyApi.getCompany(params.handle);
       setCompany({ ...response });
-    })();
+    }
+    getCompany();
   }, []);
 
   if (!company) return <div>Loading...</div>;

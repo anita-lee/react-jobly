@@ -20,10 +20,11 @@ function JobList() {
 
   //Call API to get all jobs on mount and state of searchQuery
   useEffect(function () {
-    (async function getJobs() {
+    async function getJobs() {
       const response = await JoblyApi.request("jobs", searchQuery);
       setJobs([...response.jobs]);
-    })();
+    }
+    getJobs();
   }, [searchQuery]);
 
   //Pass as prop to obtain search data, update state of searchQuery

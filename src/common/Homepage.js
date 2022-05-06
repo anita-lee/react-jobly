@@ -9,7 +9,7 @@ import UserContext from "../userContext";
  */
 function Homepage() {
 
-  const username = useContext(UserContext);
+  const user = useContext(UserContext);
 
   const loginLogout = (
     <div className="row" style={{ width: "15%" }}>
@@ -18,7 +18,7 @@ function Homepage() {
     </div>);
 
   const welcomeUser = (
-    <h3 className="text-center">Welcome back, {username}!</h3>
+    <h3 className="text-center">Welcome back, {user?.username}!</h3>
   );
 
   return (
@@ -27,7 +27,7 @@ function Homepage() {
         <h1>Jobly</h1>
         <p className="mt-3 lead display-10">All the jobs in one, convenient place.</p>
       </div>
-      {!username
+      {!user?.username
         ?
         loginLogout
         :

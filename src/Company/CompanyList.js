@@ -22,10 +22,11 @@ function CompanyList() {
 
   //Call API to get all companies on mount and state of searchQuery
   useEffect(function () {
-    (async function getCompanies() {
+    async function getCompanies() {
       const response = await JoblyApi.request("companies", searchQuery);
       setCompanies([...response.companies]);
-    })();
+    }
+    getCompanies();
   }, [searchQuery]);
 
   //Pass as prop to obtain search data, update state of searchQuery

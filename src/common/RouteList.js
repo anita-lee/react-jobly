@@ -16,26 +16,31 @@ import UserContext from "../userContext";
  */
 
 function RouteList({ login, register, update }) {
-  const username = useContext(UserContext);
+  const user = useContext(UserContext);
 
   const protectedRoutes = (
-  <>
-    <Route
-    path="/companies"
-    element={<CompanyList />}
-    />
+    <>
+      <Route
+        path="/companies"
+        element={<CompanyList />}
+      />
 
-    <Route
-      path="/jobs"
-      element={<JobList />}
-    />
+      <Route
+        path="/jobs"
+        element={<JobList />}
+      />
 
-    <Route
-      path="/companies/:handle"
-      element={<CompanyDetail />}
-    />
-  </>
-  )
+      <Route
+        path="/companies/:handle"
+        element={<CompanyDetail />}
+      />
+
+      <Route
+        path="/profile"
+        element={<Profile update={update} />}
+      />
+    </>
+  );
 
   return (
     <Routes>
@@ -55,12 +60,8 @@ function RouteList({ login, register, update }) {
         element={<Register register={register} />}
       />
 
-    {username && protectedRoutes}
+      {localStorage.token && protectedRoutes}
 
-      <Route
-        path="/profile"
-        element={<Profile update={update} />}
-      />
       <Route
         path="/*"
         element={<Navigate to="/" />}

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import UserContext from "../userContext";
+import CompanyList from "../Company/CompanyList";
 
 /** Login Form
  *
@@ -13,6 +15,9 @@ import React, { useState } from "react";
  */
 
 function Login({ login }) {
+
+  const user = useContext(UserContext);
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -34,7 +39,10 @@ function Login({ login }) {
     setFormData(data => ({ username: "", password: "" }));
   }
 
+  if (user) return <CompanyList />
+
   return (
+
     <div>
       <form className="" onSubmit={handleSubmit}>
         <div>

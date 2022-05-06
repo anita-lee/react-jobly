@@ -14,16 +14,17 @@ import UserContext from "../userContext";
 
 function Profile({ update }) {
 
-  const username = useContext(UserContext);
+  const user = useContext(UserContext);
 
   const defaultValues = {
-    username: username,
-    firstName: "",
-    lastName: "",
-    email: ""
+    username: user.username,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email
   };
 
   const [formData, setFormData] = useState(defaultValues);
+  const [submitSuccess, setSubmitSuccess] = useState(null)
 
   /** Update form input. */
   function handleChange(evt) {
@@ -40,7 +41,7 @@ function Profile({ update }) {
     const updatedData = { ...formData };
     delete updatedData.username;
     update({ ...updatedData });
-    setFormData(data => (defaultValues));
+    setSubmitSuccess("Update Successful!")
   }
 
   const formFields = Object.keys(defaultValues);
@@ -54,7 +55,7 @@ function Profile({ update }) {
   return (
     <div>
       <form className="" onSubmit={handleSubmit}>
-        {formFields.map((field, i) => {
+        {formFields.map(field => {
           return (
             <div key={field}>
               <label htmlFor={`Register-${field}`}>{formNames[field]}</label>
@@ -69,6 +70,7 @@ function Profile({ update }) {
               />
             </div>);
         })}
+        {submitSuccess && <div className="alert alert-success" role="alert">{submitSuccess}</div>}
         <button className="btn btn-primary mt-2">Submit</button>
       </form>
     </div>

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import UserContext from "../userContext";
+import CompanyList from "../Company/CompanyList";
 
 /** Register Form
  *
@@ -13,6 +15,8 @@ import React, { useState } from "react";
  */
 
 function Register({ register }) {
+
+  const user = useContext(UserContext);
 
   const defaultValues = {
     username: "",
@@ -48,6 +52,8 @@ function Register({ register }) {
     lastName: "Last Name",
     email: "Email"
   };
+
+  if (user) return <CompanyList />
 
   return (
     <div>

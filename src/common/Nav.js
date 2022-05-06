@@ -10,7 +10,7 @@ import UserContext from "../userContext";
 
 function Nav({ logout }) {
 
-  const username = useContext(UserContext);
+  const user = useContext(UserContext);
 
   const loggedIn = (
     <ul className="navbar-nav mx-5">
@@ -31,7 +31,7 @@ function Nav({ logout }) {
       </li>
       <li>
         <NavLink className="nav-link active " to="/" onClick={logout} end>
-          Log out {username}
+          Log out {user?.username}
         </NavLink>
       </li>
     </ul>);
@@ -56,7 +56,7 @@ function Nav({ logout }) {
       <NavLink className="navbar-brand nav-link active my-3 mx-3" to="/" end>
         Jobly
       </NavLink>
-      {!username
+      {!user?.username
         ?
         loggedOut
         :

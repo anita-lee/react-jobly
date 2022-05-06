@@ -21,23 +21,27 @@ function JoblyApp() {
 
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem(TOKEN_LOCAL_KEY));
+  const [loadingUser, setLoadingUser] = useState(false);
 
   //api call for token
   async function login(formData) {
+    setLoadingUser(true);
     const loginToken = await JoblyApi.login(formData);
     setToken(loginToken);
   };
 
   //api call for token
   async function register(formData) {
+    setLoadingUser(true);
     const registerToken = await JoblyApi.register(formData);
     setToken(registerToken);
   };
 
-   //api call for updating formData
-   async function update(formData) {
+  //api call for updating formData
+  async function update(formData) {
+    // setLoadingUser(true);
     const updatedUser = await JoblyApi.update(formData, user.username, token);
-    setUser(preUser => ({...preUser, ...updatedUser}));
+    setUser(preUser => ({ ...preUser, ...updatedUser }));
   };
 
   //strip state of user and token, strip local Storage of token
@@ -56,18 +60,19 @@ function JoblyApp() {
   // decode token and setUser state and store token in local Storage,
   // depends on token state.
   useEffect(function () {
-    //TODO: fix iffe
     if (token) {
-      (async function getUserName() {
+      async function getUserName() {
         const username = decodeToken(token);
         const newUser = await JoblyApi.getUser(username, token);
         setUser(() => newUser);
         localStorage.setItem(TOKEN_LOCAL_KEY, token);
-      })();
+      };
+      getUserName();
+      setLoadingUser(false);
     }
   }, [token]);
 
-  //FIXME: Loading...  conditional
+  if (loadingUser) return <div>Loading</div>
 
   return (
     <UserContext.Provider value={user}>
