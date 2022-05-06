@@ -41,7 +41,7 @@ function CompanyList() {
         ?
         <p>Loading...</p>
         :
-        <div class="row">
+        <div className="row d-flex justify-content-center">
           {companies.map(company =>
             <CompanyCard company={company} key={company.handle} />)}
         </div>}

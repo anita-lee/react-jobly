@@ -12,20 +12,20 @@ function Homepage() {
   const user = useContext(UserContext);
 
   const loginLogout = (
-    <div className="row" style={{ width: "15%" }}>
-      <Link className="btn btn-primary mx-1 btn-sm mb-2" to={`/login`}>Login</Link>
-      <Link className="btn btn-primary mx-1 btn-sm " to={`/register`}>Sign Up</Link>
+    <div className="col-12 d-flex justify-content-center">
+      <Link className="btn btn-primary mx-1 d-inline" to={`/login`}>Login</Link>
+      <Link className="btn btn-primary mx-1 d-inline" to={`/register`}>Sign Up</Link>
     </div>);
 
   const welcomeUser = (
-    <h3 className="text-center">Welcome back, {user?.username}!</h3>
+    <h3 className="text-light text-center">Welcome back, {user?.username}!</h3>
   );
 
   return (
-    <div style={{ width: "100vw" }} className="row d-flex align-items-center justify-content-center">
-      <div className="col-12 text-center">
+    <div className="row d-flex align-items-center w-100 justify-content-center">
+      <div className="col-12 text-center text-light">
         <h1>Jobly</h1>
-        <p className="mt-3 lead display-10">All the jobs in one, convenient place.</p>
+        <p className="mt-3 lead">All the jobs in one, convenient place.</p>
       </div>
       {!user?.username
         ?

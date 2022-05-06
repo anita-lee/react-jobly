@@ -33,8 +33,8 @@ function SearchForm({ search, queryName }) {
   }
 
   return (
-      <div className="row rounded my-4">
-        <form className="input-group" onSubmit={handleSubmit}>
+      <div className="row d-flex justify-content-center rounded my-4">
+        <form className="input-group w-75" onSubmit={handleSubmit}>
             <input
                 className="form-control"
                 id="searchByName"

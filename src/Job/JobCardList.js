@@ -10,7 +10,7 @@ import JobCard from "./JobCard";
 
 function JobCardList({ jobs }) {
   return (
-    <div className="row">
+    <div className="d-flex justify-content-center row">
       {jobs.map(job => <JobCard job={job} key={job.id} />)}
     </div>
   )

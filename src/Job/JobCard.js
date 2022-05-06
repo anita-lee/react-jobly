@@ -9,11 +9,11 @@ import React from "react";
 
 function JobCard({ job }) {
   return (
-    <div className="col-12 my-4 border border-solid p-4">
-      <h5>{job.title}</h5>
+    <div className="col-12 mb-4 bg-white border border-solid p-3 w-75 rounded">
+      <h6>{job.title}</h6>
       <br />
-      {job.salary && <p className="lead">Salary:&nbsp;{job.salary}</p>}
-      {job.equity && <p className="lead">Equity:&nbsp;{job.equity}</p>}
+      {job.salary && <p className="lead"><small>Salary:&nbsp;{job.salary}</small></p>}
+      {job.equity && <p className="lead"><small>Equity:&nbsp;{job.equity}</small></p>}
     </div>
   );
 }

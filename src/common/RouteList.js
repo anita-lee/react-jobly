@@ -42,6 +42,8 @@ function RouteList({ login, register, update }) {
     </>
   );
 
+  if (!user && localStorage.token) return <div>Loading...</div>;
+
   return (
     <Routes>
 

@@ -43,12 +43,14 @@ function Login({ login }) {
 
   return (
 
-    <div>
-      <form className="" onSubmit={handleSubmit}>
+    <div className="row w-100">
+      <div className="col-12">
+      <h3 className="text-white mt-3">Log In</h3>
+      <form  className="bg-white p-3 w-50 h-25 rounded" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="Login-username">Username</label>
           <input
-            className="form-control m-2"
+            className="form-control mb-1"
             id="Login-username"
             onChange={handleChange}
             name="username"
@@ -60,7 +62,7 @@ function Login({ login }) {
           <label htmlFor="Login-password">Password</label>
           <input
             type={"password"}
-            className="form-control m-2"
+            className="form-control mb-2"
             id="Login-password"
             onChange={handleChange}
             name="password"
@@ -68,8 +70,9 @@ function Login({ login }) {
             autoComplete={"true"}
           />
         </div>
-        <button className="btn btn-primary mt-3">Submit</button>
+        <button className="btn btn-primary">Submit</button>
       </form>
+      </div>
     </div>
   );
 }

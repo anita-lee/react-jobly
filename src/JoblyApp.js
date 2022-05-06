@@ -1,14 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import RouteList from "./common/RouteList";
 import Nav from "./common/Nav";
 import UserContext from "./userContext";
 import JoblyApi from "./utilities/api";
 import jwt_decode from "jwt-decode";
+import "./JoblyApp.css"
 
 const TOKEN_LOCAL_KEY = "token";
 
-/** Hendles user authentication. Renders routes and navbar
+/** Handles user authentication. Renders routes and navbar
  * Provider for UserContext.
  *
  * Props: none
@@ -44,7 +45,7 @@ function JoblyApp() {
     setUser(preUser => ({ ...preUser, ...updatedUser }));
   };
 
-  //strip state of user and token, strip local Storage of token
+  //strip state of user and token, strip token from local Storage
   function logout() {
     setToken(() => null);
     setUser(() => null);
@@ -72,14 +73,13 @@ function JoblyApp() {
     }
   }, [token]);
 
-  if (loadingUser) return <div>Loading</div>
+  if (loadingUser) return <div>Loading...</div>;
 
   return (
     <UserContext.Provider value={user}>
       <BrowserRouter>
         <Nav logout={logout} />
-        <div style={{ height: "50vh" }}
-          className="container d-flex" >
+        <div id="JoblyApp" className="container-fluid d-flex" style={{height: "100vh"}}>
           <RouteList register={register} login={login} update={update} />
         </div>
       </BrowserRouter>

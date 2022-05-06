@@ -26,9 +26,9 @@ function CompanyDetail() {
   if (!company) return <div>Loading...</div>;
 
   return (
-    <div className="row">
-      <h2 className="mb-3">{company.name}</h2>
-      <p>{company.description}</p>
+    <div className="row d-flex justify-content-center">
+      <h2 className="my-4 text-white text-center">{company.name}</h2>
+      <p className="mb-4 text-white text-center w-75">{company.description}</p>
       <JobCardList jobs={company.jobs} />
     </div>
   );

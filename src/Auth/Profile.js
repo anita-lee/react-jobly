@@ -53,14 +53,16 @@ function Profile({ update }) {
   };
 
   return (
-    <div>
-      <form className="" onSubmit={handleSubmit}>
+    <div className="row w-100">
+      <div className="col-12">
+      <h3 className="text-white mt-3">Profile</h3>
+      <form  className="bg-white p-3 w-50 h-40 rounded" onSubmit={handleSubmit}>
         {formFields.map(field => {
           return (
             <div key={field}>
               <label htmlFor={`Register-${field}`}>{formNames[field]}</label>
               <input
-                className="form-control m-2"
+                className="form-control mb-2"
                 id={`Register-${field}`}
                 onChange={handleChange}
                 name={field}
@@ -71,8 +73,9 @@ function Profile({ update }) {
             </div>);
         })}
         {submitSuccess && <div className="alert alert-success" role="alert">{submitSuccess}</div>}
-        <button className="btn btn-primary mt-2">Submit</button>
+        <button className="btn btn-primary">Submit</button>
       </form>
+    </div>
     </div>
   );
 }
