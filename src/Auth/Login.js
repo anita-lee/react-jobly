@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import UserContext from "../userContext";
 import CompanyList from "../Company/CompanyList";
+import { Navigate, useNavigate} from "react-router-dom";
 
 /** Login Form
  *
@@ -14,9 +15,10 @@ import CompanyList from "../Company/CompanyList";
  * JoblyApp -> Login
  */
 
-function Login({ login }) {
+function Login({ login, error }) {
 
   const user = useContext(UserContext);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -33,45 +35,45 @@ function Login({ login }) {
   }
 
   /** Submit form: call function from parent & clear inputs. */
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    login({ ...formData });
+    await login({ ...formData });
     setFormData(data => ({ username: "", password: "" }));
+    navigate("/companies");
   }
-
-  if (user) return <CompanyList />
 
   return (
 
-    <div className="row w-100">
-      <div className="col-12">
-      <h3 className="text-white mt-3">Log In</h3>
-      <form  className="bg-white p-3 w-50 h-25 rounded" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="Login-username">Username</label>
-          <input
-            className="form-control mb-1"
-            id="Login-username"
-            onChange={handleChange}
-            name="username"
-            value={formData.username}
-            autoComplete={"true"}
-          />
-        </div>
-        <div>
-          <label htmlFor="Login-password">Password</label>
-          <input
-            type={"password"}
-            className="form-control mb-2"
-            id="Login-password"
-            onChange={handleChange}
-            name="password"
-            value={formData.password}
-            autoComplete={"true"}
-          />
-        </div>
-        <button className="btn btn-primary">Submit</button>
-      </form>
+    <div className="row d-flex justify-content-center w-100 h-25 mt-5">
+      <div className="col-12 w-50">
+        <h3 className="text-white">Log In</h3>
+        <form className="bg-white my-3 p-3 rounded" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="Login-username">Username</label>
+            <input
+              className="form-control mb-1"
+              id="Login-username"
+              onChange={handleChange}
+              name="username"
+              value={formData.username}
+              autoComplete={"true"}
+            />
+          </div>
+          <div>
+            <label htmlFor="Login-password">Password</label>
+            <input
+              type={"password"}
+              className="form-control mb-2"
+              id="Login-password"
+              onChange={handleChange}
+              name="password"
+              value={formData.password}
+              autoComplete={"true"}
+            />
+          </div>
+          {error && <div className="alert alert-danger" role="alert">{error}</div>}
+          <button className="btn btn-primary">Submit</button>
+        </form>
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ import CompanyList from "../Company/CompanyList";
  * JoblyApp -> Register
  */
 
-function Register({ register }) {
+function Register({ register, error }) {
 
   const user = useContext(UserContext);
 
@@ -53,30 +53,30 @@ function Register({ register }) {
     email: "Email"
   };
 
-  if (user) return <CompanyList />
 
   return (
-    <div className="row w-100">
-      <div className="col-12">
-      <h3 className="text-white mt-3">Sign Up</h3>
-      <form  className="bg-white p-3 w-50 h-60 rounded" onSubmit={handleSubmit}>
-        {formFields.map((field, i) => {
-          return (
-            <div key={field}>
-              <label htmlFor={`Register-${field}`}>{formNames[field]}</label>
-              <input
-                type={field === "password" ? field : field === "email" ? field : "text"}
-                className="form-control mb-2"
-                id={`Register-${field}`}
-                onChange={handleChange}
-                name={field}
-                value={formData[field]}
-                autoComplete={"true"}
-              />
-            </div>);
-        })}
-        <button className="btn btn-primary mt-2">Submit</button>
-      </form>
+    <div className="row d-flex justify-content-center w-100 h-25 mt-5 mb-2">
+      <div className="col-12 w-50">
+        <h3 className="text-white my-3">Sign Up</h3>
+        <form className="bg-white p-3 rounded" onSubmit={handleSubmit}>
+          {formFields.map((field, i) => {
+            return (
+              <div key={field}>
+                <label htmlFor={`Register-${field}`}>{formNames[field]}</label>
+                <input
+                  type={field === "password" ? field : field === "email" ? field : "text"}
+                  className="form-control mb-2"
+                  id={`Register-${field}`}
+                  onChange={handleChange}
+                  name={field}
+                  value={formData[field]}
+                  autoComplete={"true"}
+                />
+              </div>);
+          })}
+          {error && <div className="alert alert-danger" role="alert">{error}</div>}
+          <button className="btn btn-primary mt-2">Submit</button>
+        </form>
       </div>
     </div>
   );

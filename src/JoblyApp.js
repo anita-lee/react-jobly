@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useNavigate } from "react-router-dom";
 import RouteList from "./common/RouteList";
 import Nav from "./common/Nav";
 import UserContext from "./userContext";
 import JoblyApi from "./utilities/api";
 import jwt_decode from "jwt-decode";
-import "./JoblyApp.css"
+import "./JoblyApp.css";
 
 const TOKEN_LOCAL_KEY = "token";
 
@@ -20,29 +20,51 @@ const TOKEN_LOCAL_KEY = "token";
 
 function JoblyApp() {
 
+  // const navigate = useNavigate();
+
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem(TOKEN_LOCAL_KEY));
   const [loadingUser, setLoadingUser] = useState(false);
+  const [formError, setFormError] = useState(null);
 
   //api call for token
   async function login(formData) {
-    setLoadingUser(true);
-    const loginToken = await JoblyApi.login(formData);
-    setToken(loginToken);
+    try {
+      setLoadingUser(true);
+      const loginToken = await JoblyApi.login(formData);
+      setToken(loginToken);
+      // navigate("/companies");
+    }
+    catch (err) {
+      setFormError(() => err);
+      setLoadingUser(false);
+    }
   };
 
   //api call for token
   async function register(formData) {
-    setLoadingUser(true);
-    const registerToken = await JoblyApi.register(formData);
-    setToken(registerToken);
+    try {
+      setLoadingUser(true);
+      const registerToken = await JoblyApi.register(formData);
+      setToken(registerToken);
+      // navigate("/companies");
+    }
+    catch (err) {
+      setFormError(() => err);
+      setLoadingUser(false);
+    }
   };
 
   //api call for updating formData
   async function update(formData) {
-    // setLoadingUser(true);
-    const updatedUser = await JoblyApi.update(formData, user.username, token);
-    setUser(preUser => ({ ...preUser, ...updatedUser }));
+    try {
+      const updatedUser = await JoblyApi.update(formData, user.username, token);
+      setUser(preUser => ({ ...preUser, ...updatedUser }));
+    }
+    catch (err) {
+      setFormError(() => err);
+      setLoadingUser(false);
+    }
   };
 
   //strip state of user and token, strip token from local Storage
@@ -58,6 +80,11 @@ function JoblyApp() {
     return decode.username;
   }
 
+  //update state of form error
+  function updateError() {
+    setFormError(null);
+  }
+
   // decode token and setUser state and store token in local Storage,
   // depends on token state.
   useEffect(function () {
@@ -70,6 +97,7 @@ function JoblyApp() {
       };
       getUserName();
       setLoadingUser(false);
+      setFormError(null);
     }
   }, [token]);
 
@@ -79,8 +107,13 @@ function JoblyApp() {
     <UserContext.Provider value={user}>
       <BrowserRouter>
         <Nav logout={logout} />
-        <div id="JoblyApp" className="container-fluid d-flex" style={{height: "100vh"}}>
-          <RouteList register={register} login={login} update={update} />
+        <div id="JoblyApp" className="container-fluid d-flex" style={{ height: "100vh" }}>
+          <RouteList
+            register={register}
+            login={login}
+            update={update}
+            error={formError}
+            updateError={updateError} />
         </div>
       </BrowserRouter>
     </UserContext.Provider>

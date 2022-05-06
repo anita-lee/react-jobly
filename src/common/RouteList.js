@@ -15,7 +15,7 @@ import UserContext from "../userContext";
  * State: none
  */
 
-function RouteList({ login, register, update }) {
+function RouteList({ login, register, update, error, updateError }) {
   const user = useContext(UserContext);
 
   const protectedRoutes = (
@@ -37,12 +37,10 @@ function RouteList({ login, register, update }) {
 
       <Route
         path="/profile"
-        element={<Profile update={update} />}
+        element={<Profile update={update} error={error} updateError={updateError}/>}
       />
     </>
   );
-
-  if (!user && localStorage.token) return <div>Loading...</div>;
 
   return (
     <Routes>
@@ -52,17 +50,21 @@ function RouteList({ login, register, update }) {
         element={<Homepage />}
       />
 
-      <Route
-        path="/login"
-        element={<Login login={login} />}
-      />
+      {!user ?
+        <>
+          <Route
+            path="/login"
+            element={<Login login={login} error={error} />}
+          />
 
-      <Route
-        path="/register"
-        element={<Register register={register} />}
-      />
-
-      {localStorage.token && protectedRoutes}
+          <Route
+            path="/register"
+            element={<Register register={register} error={error} />}
+          />
+        </>
+        :
+        protectedRoutes
+      }
 
       <Route
         path="/*"

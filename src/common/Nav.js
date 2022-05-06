@@ -57,7 +57,7 @@ function Nav({ logout }) {
       <NavLink className="navbar-brand nav-link my-3 mx-3" to="/" end>
         Jobly
       </NavLink>
-      {!user?.username
+      {!user
         ?
         loggedOut
         :
