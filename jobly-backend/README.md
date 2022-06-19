@@ -1,6 +1,12 @@
-# Jobly
+# Jobly Backend
 
-Jobly is the backend for a job listing application focusing on Express in a node.js environment.  This was built as a coding bootcamp project.
+## Description
+
+Jobly is a job searching API built with Express, Node and PostgreSQL. Jobly includes full CRUD capabilities on companies, jobs, and users routes, with filtering options.  
+
+## Demo
+
+[DEMO](https://jobly-anita.herokuapp.com/companies)
 
 ## Installation
 
@@ -8,10 +14,11 @@ Run `npm install` to install required modules.
 
 ## Usage
 
-In the project directory, you can run `npm start`.
+Run `node server.js`.
 
 Runs the app in the development mode. @ [http://localhost:3001](http://localhost:3001).
 
-## Demo
+## Tests
 
-<add heroku link>
+Run `jest -i`.
+
